@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+
+		<div class="card bg-light">
+			<div class="card-header" th:text="${title}"></div>
+			<div class="card-body">
+
+				<h4 class="card-title">
+					<a th:href="@{/form}" class="btn btn-primary btn-xs">Nuevo Producto</a>
+				</h4>
+				<table class="table table-striped table-bordered">
+					<thead class="thead-inverse">
+						<tr>
+							<th>Descripcion</th>
+							<th>Marca</th>
+							<th>Precio</th>
+							<th>Fec. Registro</th>
+							<th>editar</th>
+							<th>eliminar</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="item: ${products}">
+							<td th:text="${item.productName}"></td>
+							<td th:text="${item.productBrand}"></td>
+							<td th:text="${item.productPrice}"></td>
+							<td th:text="${item.registryDate}"></td>
+							<td><a class="btn btn-primary btn-xs"
+								th:href="@{/form/}+${item.productId}" th:text="'editar'"></a></td>
+							<td><a class="btn btn-danger btn-xs"
+								th:href="@{/delete/} + ${item.productId}" th:text="'eliminar'"
+								onclick="return confirm('Estas seguro que quieres eliminar?');"></a></td>
+						</tr>
+					</tbody>
+
+				</table>
+			</div>
+		</div>
+
+
+	</div>
+</body>
+</html>
